@@ -1,4 +1,4 @@
-# https.server - Python SimpleHTTPServer wrapped in TLS
+# https.server - Python SimpleHTTPServer over TLS
 
 The Python in-built `http.server` is great when to nead to temperarily
 start up a simple webserver, to transfer files or host baisc content.
