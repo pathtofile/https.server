@@ -9,6 +9,7 @@ import ssl
 import argparse
 import socketserver
 import tempfile
+import random
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from functools import partial
 from OpenSSL import crypto, SSL
@@ -70,7 +71,8 @@ def generate_cert():
     cert.get_subject().ST = "Python SimpleHTTPSServer"
     cert.get_subject().OU = "Python SimpleHTTPSServer"
     cert.get_subject().CN = "Python SimpleHTTPSServer"
-    cert.set_serial_number(1000)
+    # Use a unique serial number
+    cert.set_serial_number(random.randint(1, 2147483647))
     cert.gmtime_adj_notBefore(0)
     # Expire cert after 1 year
     cert.gmtime_adj_notAfter(365 * 24 * 60 * 60)
