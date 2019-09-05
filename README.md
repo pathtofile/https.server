@@ -15,6 +15,15 @@ or called on the commandline with `python -m https.server` or just `https.server
 Either pass in a pre-generated TLS cert and key, or the project will create a new
 tempeory one for you.
 
+## Requirements
+https.server runs on Python 3.6 or later
+
+## Install
+Easiest way is from pip:
+```bash
+pip install https.server
+```
+
 ## Examples
 Serve the current folder over TLS on the default port:
 ```bash
