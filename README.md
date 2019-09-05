@@ -17,29 +17,31 @@ tempeory one for you.
 
 ## Examples
 Serve the current folder over TLS on the default port:
-```
+```bash
 https.server
+# OR
+python -m https.server
 ```
 
 Serve a specific folder of TLS
-```
+```bash
 https.server --directory foo
 ```
 
 Serve the current folder on 443
 **Note:** Usually requires root/administrator privliges
-```
+```bash
 https.server 443
 ```
 
 Serve the current folder on localhost only
-```
+```bash
 https.server --bind 127.0.0.1
 ```
 
 Serve folder over TLS, using an existing certificate
 **Note:** Certificate must be DER encoded, and have both the cert
 and private key in the same file
-```
+```bash
 https.server --existing-cert mycert.der
 ```
