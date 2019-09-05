@@ -1,18 +1,21 @@
-# Simple HTTPS Server - Python SimpleHTTPServer wrapped in TLS
+# https.server - Python SimpleHTTPServer wrapped in TLS
 
-This project Creates a basic HTTPS Server, that behaves just like
-the in-built `http.server` or `SimpleHTTPServer`, but uses TLS.
+The Python in-built `http.server` is great when to nead to temperarily
+start up a simple webserver, to transfer files or host baisc content.
+
+`https.server` Works exaclty the same, but the connection will be over TLS,
+giving slightly more privacy and security.
 
 Just like `http.server`, by default it will server the current directory,
 but you can also set it to serve a specific folder.
 
-Just like `SimpleHTTPServer`, it can be imported as Class in Python,
+It can be imported as Class in Python,
 or called on the commandline with `python -m https.server` or just `https.server`
 
 Either pass in a pre-generated TLS cert and key, or the project will create a new
 tempeory one for you.
 
-## Example
+## Examples
 Serve the current folder over TLS on the default port:
 ```
 https.server
