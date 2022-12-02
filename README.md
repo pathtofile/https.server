@@ -48,6 +48,11 @@ Serve the current folder on localhost only
 https.server --bind 127.0.0.1
 ```
 
+Save the auto-generated cert for future use:
+```bash
+https.server --save-cert
+```
+
 Serve folder over TLS, using an existing certificate
 **Note:** Certificate must be DER encoded, and have both the cert
 and private key in the same file

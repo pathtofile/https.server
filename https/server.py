@@ -110,6 +110,11 @@ def main():
                         help='Specify an existing cert to use '
                         'instead of auto-generating one. File must contain '
                         'both DER-encoded cert and private key')
+    parser.add_argument('--save-cert',
+                        '-s',
+                        dest="save_cert",
+                        action="store_true",
+                        help='Save certificate file in current directory')
     args = parser.parse_args()
 
     # If supplied cert use that
@@ -124,6 +129,11 @@ def main():
             with open(cert_path, "w") as f:
                 f.write(key_pem)
                 f.write(cert_pem)
+            if args.save_cert:
+                save_path = os.path.join(os.getcwd(), "cert.pem")
+                with open(save_path, "w") as f:
+                    f.write(key_pem)
+                    f.write(cert_pem)
             run_server(args.bind, args.port, args.directory, cert_path)
 
 
