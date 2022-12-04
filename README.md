@@ -53,6 +53,32 @@ Save the auto-generated cert for future use:
 https.server --save-cert
 ```
 
+# Using as a library
+You can also use the server as a library to serve cursom HTTP responses:
+```python
+from http.server import BaseHTTPRequestHandler
+from https.server import HTTPSServer, generate_cert
+
+class CustomRequestHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        message = "Hello!"
+
+        self.protocol_version = "HTTP/1.1"
+        self.send_response(200)
+        self.send_header("Content-Length", len(message))
+        self.end_headers()
+
+        self.wfile.write(bytes(message, "utf8"))
+        return
+
+cert_path = "cert.pem"
+server = ("127.0.0.1", 8443)
+
+generate_cert(cert_path)
+httpd = HTTPSServer(cert_path, server, CustomRequestHandler)
+httpd.serve_forever()
+```
+
 Serve folder over TLS, using an existing certificate
 **Note:** Certificate must be DER encoded, and have both the cert
 and private key in the same file

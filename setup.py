@@ -5,7 +5,7 @@ import os
 from setuptools import setup
 
 setup(name="https.server",
-      version="1.1.0",
+      version="1.2.0",
       description="https.server - SimpleHTTPServer wrapped in TLS",
       author="/path/to/file",
       license="MIT",
