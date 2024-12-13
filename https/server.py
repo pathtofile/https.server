@@ -1,7 +1,7 @@
 """
 https.server - SimpleHTTPServer wrapped in TLS"
 """
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __all__ = ["HTTPSServer", "ThreadingHTTPSServer", "generate_cert"]
 
 import os
@@ -25,8 +25,10 @@ class HTTPSServer(HTTPServer):
         super().__init__(*args, **kwargs)
         # Wrap Socket using TLS cert
         self.cert_path = cert_path
-        self.socket = ssl.wrap_socket(
-            self.socket, server_side=True, certfile=self.cert_path
+        self.context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+        self.context.load_cert_chain(cert_path)
+        self.socket = self.context.wrap_socket(
+            self.socket, server_side=True
         )
 
 
