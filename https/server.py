@@ -12,7 +12,7 @@ import tempfile
 import random
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from functools import partial
-from OpenSSL import crypto, SSL
+from OpenSSL import crypto
 
 
 class HTTPSServer(HTTPServer):
@@ -243,9 +243,9 @@ def main():
             try:
                 extract_client_cert(cert_path, client_cert_path)
                 print(f"Client certificate saved to: {client_cert_path}")
-                print(f"\nTo use with requests library:")
-                print(f"  import requests")
-                print(f"  response = requests.get('https://{bind_addr}:{args.port}', verify='{client_cert_path}')")
+                print("\nTo use with requests python library:")
+                print("  import requests")
+                print("  response = requests.get('https://{bind_addr}:{args.port}', verify='{client_cert_path}')")
             except Exception as e:
                 print(f"Warning: Could not extract client certificate: {e}")
         
