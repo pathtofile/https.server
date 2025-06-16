@@ -53,6 +53,38 @@ Save the auto-generated cert for future use:
 https.server --save-cert
 ```
 
+Save both server and client certificates (for proper SSL verification):
+```bash
+https.server --save-cert --client-cert
+```
+
+## Client Certificate Verification
+
+When using `--client-cert`, the server will generate both a server certificate (`cert.pem`) and a client certificate (`client-cert.pem`). The client certificate contains only the public certificate (no private key) and can be used by HTTP clients to verify the server's identity without SSL warnings.
+
+### Using with Python Requests
+
+```python
+import requests
+
+# Instead of using verify=False (insecure)
+# response = requests.get('https://localhost:8443', verify=False)
+
+# Use the client certificate for proper verification
+response = requests.get('https://localhost:8443', verify='client-cert.pem')
+print(response.text)
+```
+
+### Using with curl
+
+```bash
+curl --cacert client-cert.pem https://localhost:8443
+```
+
+### Using with other HTTP clients
+
+The `client-cert.pem` file can be used with any HTTP client that supports custom CA certificates for SSL verification.
+
 # Using as a library
 You can also use the server as a library to serve cursom HTTP responses:
 ```python
@@ -80,8 +112,8 @@ httpd.serve_forever()
 ```
 
 Serve folder over TLS, using an existing certificate
-**Note:** Certificate must be DER encoded, and have both the cert
+**Note:** Certificate must be PEM encoded, and have both the cert
 and private key in the same file
 ```bash
-https.server --existing-cert mycert.der
+https.server --existing-cert mycert.pem
 ```
